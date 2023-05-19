@@ -1,0 +1,7 @@
+<h1 class="text-2xl text-center font-semibold pb-4"><%= @gameplay.message %></h1>
+
+<% if @gameplay.ended? %>
+  <div class="text-center pb-4"><%= link_to 'New game?', root_url %></div>
+<% end %>
+
+<%= draw_board(@gameplay.matrix) %>

@@ -1,0 +1,24 @@
+<div class="m-auto">
+  <div class="mb-10">
+    <div class="flex">
+      <span>Board name: </span>
+      <span><%= @board.name %></span>
+    </div>
+
+    <div class="flex">
+      <span>Email: </span>
+      <span><%= @board.email %></span>
+    </div>
+  </div>
+
+  <div class="flex" data-controller="gameplay" data-gameplay-url-value="<%= boards_gameplay_url(@board) %>">
+    <div data-gameplay-target="gameplay">
+      <%= render 'boards/partials/gameplay', board: @board %>
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <h2 class="text-center">Solution</h2>
+    <%= draw_board(@board.board.solved_matrix) %>
+  </div>
+</div>

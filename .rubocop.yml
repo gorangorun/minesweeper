@@ -1,0 +1,31 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+Style/Documentation:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/OutputSafety:
+  Enabled: false
+Layout/LineLength:
+  AutoCorrect: true
+  Exclude:
+    - Gemfile
+    - db/seeds.rb
+AllCops:
+  Exclude:
+    - bin/**/*
+    - db/schema.rb
+    - db/migrate/*.rb
+    - lib/**/*
+    - config/**/*
+    - spec/spec_helper.rb
+    - spec/rails_helper.rb
+    - vendor/bundle/**/*

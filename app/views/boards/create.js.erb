@@ -1,0 +1,24 @@
+function createErrorSpan(msg) {
+  const errorMsg = document.createElement("span")
+  errorMsg.className = "text-red-400 error-msg"
+  errorMsg.innerHTML = msg
+  return errorMsg 
+}
+
+function injectErrorMsgFor(field, msg) {
+  const label = document.querySelector(field)
+  if (label) {
+    const errorMsg = createErrorSpan(msg)
+    label.parentNode.insertBefore(errorMsg, label.nextSibling)
+  }
+}
+
+<% if @board.errors.any? %>
+  document.querySelectorAll('.error-msg').forEach((x) => x.remove())
+  <% @board.errors.messages.each do |error| %>
+    <% field, msg = error.flatten %>
+    injectErrorMsgFor('label[for=board_<%= field.to_s %>]', '<%= msg %>')
+   <% end %>
+<% else %>
+  window.location = '<%= @location %>';
+<% end %>
