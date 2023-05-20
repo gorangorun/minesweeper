@@ -9,6 +9,7 @@ module Minesweeper
 
     class MinWidthError < StandardError; end
     class MinHeightError < StandardError; end
+    class MinMinesError < StandardError; end
     class MaxMinesError < StandardError; end
 
     def self.produce(...)
@@ -21,6 +22,7 @@ module Minesweeper
       @mines = mines.to_i
       raise MinWidthError, 'Min width: 2' if @width < 2
       raise MinHeightError, 'Min height: 2' if @height < 2
+      raise MinMinesError, "Min mines: 1" if @mines < 1
       raise MaxMinesError, "Max mines: #{max_mines}" if @mines > max_mines
 
       @matrix = []

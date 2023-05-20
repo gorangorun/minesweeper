@@ -24,7 +24,7 @@ class Board < ApplicationRecord
 
   def generate_matrix
     self.matrix = Minesweeper::BoardFactory.new(width:, height:, mines:).produce.matrix unless errors.any?
-  rescue Minesweeper::BoardFactory::MaxMinesError => e
+  rescue Minesweeper::BoardFactory::MaxMinesError, Minesweeper::BoardFactory::MinMinesError => e
     errors.add(:mines, e.message)
   end
 end

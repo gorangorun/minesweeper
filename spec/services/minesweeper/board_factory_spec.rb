@@ -22,6 +22,12 @@ RSpec.describe Minesweeper::BoardFactory, type: :service do
       end.to raise_error(Minesweeper::BoardFactory::MinHeightError)
     end
 
+    it 'fails to produce a board with mines below limit' do
+      expect do
+        described_class.produce(width: 5, height: 5, mines: 0)
+      end.to raise_error(Minesweeper::BoardFactory::MinMinesError)
+    end
+
     it 'fails to produce a board with mines above limit' do
       expect do
         described_class.produce(width: 5, height: 5, mines: 100)
