@@ -1,10 +1,10 @@
 .m-auto
   .mb-10
     .flex
-      %span Board name:
+      %span.font-semibold.pr-2 Board name:
       %span= @board.name
     .flex
-      %span Email:
+      %span.font-semibold.pr-2 Email:
       %span= @board.email
   .flex{"data-controller" => "gameplay", "data-gameplay-url-value" => "#{boards_gameplay_url(@board)}"}
     %div{"data-gameplay-target" => "gameplay"}

@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Minesweeper game implemented in Rails
 
-Things you may want to cover:
+![alt text](https://github.com/gorangorun/minesweeper/blob/main/public/minesweeper.png?raw=true)
 
-* Ruby version
+# Deployment
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+App is auto deployed on heroku when:
+  - pushed to main
+  - CI pass
