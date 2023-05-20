@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class BoardsController < ApplicationController
+  include Pagy::Backend
+
   def index
-    @boards = Board.by_recent
+    @pagy, @boards = pagy(Board.by_recent, items: 10)
   end
 
   def new

@@ -12,6 +12,7 @@ gem "stimulus-rails"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.29'
+gem 'pagy', '~> 6.0', '>= 6.0.3'
 
 group :development, :test do
   gem 'brakeman', '~> 5.4', '>= 5.4.1'
