@@ -16,8 +16,8 @@ class Board < ApplicationRecord
 
   scope :by_recent, -> { order(id: :desc) }
 
-  def board(b = Minesweeper::Board)
-    @board ||= b.new(matrix:, width:, height:, mines:)
+  def board(service = Minesweeper::Board)
+    @board ||= service.new(matrix:, width:, height:, mines:)
   end
 
   private

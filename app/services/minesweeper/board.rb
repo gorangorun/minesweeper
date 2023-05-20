@@ -34,6 +34,7 @@ module Minesweeper
       end
     end
 
+    # rubocop:disable Naming/MethodParameterName
     def set(x, y)
       case matrix[x][y]
       when BoardFactory::EMPTY
@@ -46,6 +47,7 @@ module Minesweeper
 
       print_matrix if @debug
     end
+    # rubocop:enable Naming/MethodParameterName
 
     private
 

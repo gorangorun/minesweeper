@@ -11,6 +11,7 @@ module BoardsHelper
     content_tag :div, fields.join.html_safe
   end
 
+  # rubocop:disable Naming/MethodParameterName
   def draw_x(x, index)
     content_tag(:div, class: 'flex', id: x) do
       draw_y(x, index)
@@ -31,12 +32,13 @@ module BoardsHelper
 
     fields.join.html_safe
   end
+  # rubocop:enable Naming/MethodParameterName
 
   def value_config(value)
     case value
     when Minesweeper::Board::EMPTY
       OpenStruct.new(symbol: '✘', class: 'text-7xl')
-    when Minesweeper::Board::MINE # , Minesweeper::BoardFactory::MINE
+    when Minesweeper::Board::MINE
       OpenStruct.new(symbol: '💣', class: 'text-5xl')
     else
       OpenStruct.new(symbol: '□', class: 'text-7xl')

@@ -5,7 +5,9 @@ require 'rails_helper'
 RSpec.describe Minesweeper::Gameplay, type: :service do
   let(:board_class) do
     Class.new(Minesweeper::Board) do
+      # rubocop:disable Lint/MissingSuper
       def initialize(...) end
+      # rubocop:enable Lint/MissingSuper
       def set(...) end
     end
   end
