@@ -1,6 +1,0 @@
-<div class="flex flex-col items-center max-w-2xl m-auto">
-  <%= link_to 'New game?', root_url, class: 'pb-4' %>
-  <h1 class="text-2xl">All boards</h1>
-  <%= render 'boards/partials/boards', boards: @boards %>
-  <%== render 'boards/partials/pagination', pagy: @pagy if @pagy.pages > 1 %>
-</div>

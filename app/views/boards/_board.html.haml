@@ -1,0 +1,9 @@
+%li.flex.hover:bg-gray-50
+  .w-full.flex.gap-3.px-6.py-4.font-normal.text-gray-900
+    .relative.h-10.w-10
+      %img.h-full.w-full.rounded-full.object-cover.object-center{:alt => "", :src => "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}/
+      %span.absolute.right-0.bottom-0.h-2.w-2.rounded-full.bg-green-400.ring.ring-white
+    .text-sm
+      .font-medium.text-gray-700= link_to board.name, board_url(board)
+      .text-gray-400= board.email
+  .px-6.py-4{:class => "w-[200px]"}= board.created_at.strftime('%Y-%m-%d %H:%M:%S')

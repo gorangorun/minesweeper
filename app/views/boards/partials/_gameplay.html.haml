@@ -1,0 +1,4 @@
+%h1.text-2xl.text-center.font-semibold.pb-4= @gameplay.message
+- if @gameplay.ended?
+  .text-center.pb-4= link_to 'New game?', root_url
+= draw_board(@gameplay.matrix)

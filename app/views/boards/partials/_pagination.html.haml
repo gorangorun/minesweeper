@@ -1,0 +1,18 @@
+.my-4.text-center
+  - link = pagy_link_proc(pagy)
+  %nav.flex.flex-wrap.items-center.justify-center.p-4{:role => "navigation"}
+    - if pagy.prev
+      %span!= link.call(pagy.prev, '<', 'class="rounded-lg bg-gray-200 py-3 px-5 my-4 mr-2" aria-label="previous"')
+    - else
+      %span.rounded-lg.bg-gray-200.px-5.my-4.mr-2{:class => "py-2.5"} &lt;
+    - pagy.series.each do |item|
+      - if item.is_a?(Integer)
+        %span.hidden.lg:block!= link.call(item, item, 'class="rounded-lg bg-gray-200 py-3 px-5 my-4 mr-2"')
+      - elsif item.is_a?(String)
+        %span.border.rounded-lg.py-3.px-5.my-4.mr-2= item
+      - elsif item == :gap
+        %span.hidden.lg:block.my-4.mr-2!= pagy_t('pagy.nav.gap')
+    - if pagy.next
+      %span!= link.call(pagy.next, '>', 'class="rounded-lg bg-gray-200 py-3 px-5" aria-label="next"')
+    - else
+      %span.rounded-lg.bg-gray-200.px-5{:class => "py-2.5"} '&gt;

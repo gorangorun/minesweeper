@@ -1,0 +1,24 @@
+.max-w-sm.m-auto
+  %h1.text-center.text-4xl.font-semibold.pb-10 Minesweeper
+  = form_with(model: @board, local: false) do |f|
+    .flex.flex-col.pb-2
+      = f.label :email
+      = f.text_field :email
+    .flex.flex-col.pb-2
+      = f.label :name
+      = f.text_field :name
+    .flex.flex-col.pb-2
+      = f.label :width
+      = f.text_field :width
+    .flex.flex-col.pb-2
+      = f.label :height
+      = f.text_field :height
+    .flex.flex-col.pb-2
+      = f.label :mines
+      = f.text_field :mines
+    .flex.flex-col.mt-4
+      = f.submit "Generate Board", class: 'btn-primary'
+.m-auto.mt-10
+  %h2.m-5.text-xl.font-semibold.text-center Most recent boards:
+  = render 'boards/partials/boards', boards: @boards if @boards.any?
+  %h3.m-5.text-xl.underline.text-center= link_to 'View all generated boards', boards_url

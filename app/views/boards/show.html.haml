@@ -1,0 +1,14 @@
+.m-auto
+  .mb-10
+    .flex
+      %span Board name:
+      %span= @board.name
+    .flex
+      %span Email:
+      %span= @board.email
+  .flex{"data-controller" => "gameplay", "data-gameplay-url-value" => "#{boards_gameplay_url(@board)}"}
+    %div{"data-gameplay-target" => "gameplay"}
+      = render 'boards/partials/gameplay', board: @board
+  .mt-10
+    %h2.text-center Solution
+    = draw_board(@board.board.solved_matrix)
