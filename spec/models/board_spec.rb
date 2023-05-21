@@ -38,7 +38,7 @@ RSpec.describe Board, type: :model do
       board = build(:board)
       board.mines = 0
       board.valid?
-      expect(board.errors.full_messages).to include("Mines Min mines: 1")
+      expect(board.errors.full_messages).to include('Mines Min mines: 1')
     end
 
     it 'fails to generate matrix if more than max mines supplied' do

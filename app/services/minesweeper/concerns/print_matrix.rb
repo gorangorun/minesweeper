@@ -3,14 +3,16 @@
 module Minesweeper
   module Concerns
     module PrintMatrix
+      # rubocop:disable Rails/Output
       def print_matrix
         matrix.each do |x|
           x.each do |y|
-            Rails.logger.debug "[#{y}]"
+            print "[#{y}]"
           end
-          Rails.logger.debug "\n"
+          puts
         end
       end
+      # rubocop:enable Rails/Output
     end
   end
 end

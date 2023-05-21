@@ -3,52 +3,40 @@
 require 'rails_helper'
 
 RSpec.describe Minesweeper::Board, type: :service do
-  let(:matrix) { [[0, 0], [1, 0]] }
+  let(:matrix) do
+    [
+      [Minesweeper::Cell.new, Minesweeper::Cell.new],
+      [Minesweeper::Cell.new, Minesweeper::Cell.new]
+    ]
+  end
   let(:board) { described_class.new(matrix:, width: 2, height: 2, mines: 1) }
 
   describe '#set' do
-    it 'marks field with empty mark' do
+    it 'reveals empty cell' do
+      cell = matrix[0][0]
       board.set(0, 0)
 
-      result = [
-        [Minesweeper::Board::EMPTY, 0],
-        [1, 0]
-      ]
-      expect(board.matrix).to eq(result)
-    end
-
-    it 'marks field with mine mark' do
-      board.set(1, 0)
-
-      result = [
-        [0, 0],
-        [Minesweeper::Board::MINE, 0]
-      ]
-      expect(board.matrix).to eq(result)
+      expect(cell.revealed?).to eq(true)
     end
 
     it 'returns correct empty fields count' do
-      board.set(1, 1)
+      board.set(0, 0)
 
-      expect(board.empty_fields).to eq(2)
+      expect(board.empty_fields).to eq(3)
     end
 
     it 'returns correct mines stepped count' do
-      board.set(1, 0)
+      cell = matrix[0][0]
+      allow(cell).to receive(:mine?).and_return(true)
+      board.set(0, 0)
 
       expect(board.mines_stepped).to eq(1)
     end
   end
 
-  describe '#solved_matrix' do
-    it 'returns solved matrix' do
-      board.set(1, 0)
-
-      result = [
-        [Minesweeper::Board::EMPTY, Minesweeper::Board::EMPTY],
-        [Minesweeper::Board::MINE, Minesweeper::Board::EMPTY]
-      ]
-      expect(board.solved_matrix).to eq(result)
+  describe '#revealed_matrix' do
+    it 'returns revealed matrix' do
+      expect(board.revealed_matrix.flatten).to all(satisfy(&:revealed?))
     end
   end
 end

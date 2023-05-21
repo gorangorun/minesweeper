@@ -2,7 +2,7 @@
 
 class Board < ApplicationRecord
   EMAIL_FORMAT = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  serialize :matrix, Array
+  serialize :matrix, MatrixSerializer
 
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email, presence: true, format: { with: EMAIL_FORMAT }

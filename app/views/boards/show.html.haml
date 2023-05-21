@@ -11,4 +11,4 @@
       = render 'boards/partials/gameplay', board: @board
   .mt-10
     %h2.text-center Solution
-    = draw_board(@board.board.solved_matrix)
+    = draw_board(@board.board.revealed_matrix)

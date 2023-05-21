@@ -5,9 +5,11 @@ module Minesweeper
     include Concerns::PrintMatrix
 
     attr_reader :board, :message
+    attr_accessor :display_matrix
 
-    def initialize(board)
+    def initialize(board, display_matrix: false)
       @board = board
+      @display_matrix = display_matrix
       set_message
     end
 
@@ -25,7 +27,7 @@ module Minesweeper
 
     def play(...)
       board.set(...)
-
+      print_matrix if display_matrix
       set_message
     end
 

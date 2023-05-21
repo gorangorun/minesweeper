@@ -4,44 +4,41 @@ module BoardsHelper
   def draw_board(matrix)
     fields = []
 
-    matrix.each_with_index do |x, index|
-      fields << draw_x(x, index)
+    matrix.each_with_index do |cells, index|
+      fields << draw_cells(cells, index)
     end
 
     content_tag :div, fields.join.html_safe
   end
 
-  # rubocop:disable Naming/MethodParameterName
-  def draw_x(x, index)
-    content_tag(:div, class: 'flex', id: x) do
-      draw_y(x, index)
+  def draw_cells(cells, index)
+    content_tag(:div, class: 'flex') do
+      draw_cell(cells, index)
     end
   end
 
-  def draw_y(x, index)
+  def draw_cell(cells, index)
     fields = []
 
-    x.each_with_index do |y, i|
+    cells.each_with_index do |cell, i|
       fields << content_tag(
         :div,
-        value_config(y).symbol,
-        class: "m-2 hover:bg-gray-200 cursor-pointer w-[58px] h-[60px] #{value_config(y).class}",
+        cell_config(cell).symbol,
+        class: "m-2 hover:bg-gray-200 cursor-pointer w-[58px] h-[60px] #{cell_config(cell).class}",
         data: { x: index, y: i, action: 'click->gameplay#swipe' }
       ).html_safe
     end
 
     fields.join.html_safe
   end
-  # rubocop:enable Naming/MethodParameterName
 
-  def value_config(value)
-    case value
-    when Minesweeper::Board::EMPTY
-      OpenStruct.new(symbol: '✘', class: 'text-7xl')
-    when Minesweeper::Board::MINE
+  def cell_config(cell)
+    return OpenStruct.new(symbol: '□', class: 'text-7xl') unless cell.revealed?
+
+    if cell.mine?
       OpenStruct.new(symbol: '💣', class: 'text-5xl')
     else
-      OpenStruct.new(symbol: '□', class: 'text-7xl')
+      OpenStruct.new(symbol: '✘', class: 'text-7xl')
     end
   end
 end
