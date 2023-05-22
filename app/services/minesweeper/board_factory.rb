@@ -52,34 +52,34 @@ module Minesweeper
       x = rand(width)
       y = rand(height)
 
-      if matrix[x][y].empty?
-        matrix[x][y].set_mine
+      if matrix[y][x].empty?
+        matrix[y][x].set_mine
       else
         insert_mine
       end
     end
 
     def blank_matrix
-      width.times.each do |x|
-        matrix[x] = []
-        height.times.each do |y|
-          matrix[x][y] = Cell.new
+      height.times.each do |y|
+        matrix[y] = []
+        width.times.each do |x|
+          matrix[y][x] = Cell.new
         end
       end
     end
 
     def blank_matrix_v2
-      @matrix = Array.new(width) { Array.new(height, Cell.new) }
+      @matrix = Array.new(height) { Array.new(width, Cell.new) }
     end
 
     def blank_matrix_v3
-      width.times do
-        x = []
-        height.times do
-          x << Cell.new
+      height.times do
+        y = []
+        width.times do
+          y << Cell.new
         end
 
-        matrix << x
+        matrix << y
       end
     end
   end

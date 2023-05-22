@@ -5,9 +5,19 @@ require 'rails_helper'
 RSpec.describe Minesweeper::BoardFactory, type: :service do
   describe '#produce' do
     it 'produces board' do
-      board = described_class.produce(width: 5, height: 5, mines: 5)
+      board = described_class.produce
 
       expect(board.class).to eq(Minesweeper::Board)
+    end
+
+    it 'produces 3x4 board with 6 mines' do
+      width = 3
+      height = 4
+      board_factory = described_class.new(width:, height:)
+      board_factory.produce
+
+      result = [width, height]
+      expect([board_factory.matrix.first.size, board_factory.matrix.size]).to eq(result)
     end
 
     it 'fails to produce a board with width less than 2' do
