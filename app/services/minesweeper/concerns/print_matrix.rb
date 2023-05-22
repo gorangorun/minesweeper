@@ -7,7 +7,7 @@ module Minesweeper
       def print_matrix
         matrix.each do |x|
           x.each do |y|
-            print "[#{y}]"
+            print y.revealed? ? "[#{y.value}]" : '[x]'
           end
           puts
         end

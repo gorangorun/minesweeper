@@ -8,17 +8,17 @@ RSpec.describe Minesweeper::Gameplay, type: :service do
       # rubocop:disable Lint/MissingSuper
       def initialize(...) end
       # rubocop:enable Lint/MissingSuper
-      def set(...) end
+      def reveal(...) end
     end
   end
 
   let(:board) { board_class.new }
   let(:gameplay) { described_class.new(board) }
 
-  describe '#play' do
+  describe '#reveal' do
     it 'sets won message' do
       allow(board).to receive(:empty_fields).and_return(0)
-      gameplay.play(1, 0)
+      gameplay.reveal(1, 0)
 
       expect(gameplay.message).to eq('You won')
     end
@@ -26,7 +26,7 @@ RSpec.describe Minesweeper::Gameplay, type: :service do
     it 'sets lost message' do
       allow(board).to receive(:empty_fields).and_return(10)
       allow(board).to receive(:mines_stepped).and_return(1)
-      gameplay.play(1, 0)
+      gameplay.reveal(1, 0)
 
       expect(gameplay.message).to eq('You lost')
     end
@@ -34,7 +34,7 @@ RSpec.describe Minesweeper::Gameplay, type: :service do
     it 'sets fields left message' do
       allow(board).to receive(:empty_fields).and_return(10)
       allow(board).to receive(:mines_stepped).and_return(0)
-      gameplay.play(1, 0)
+      gameplay.reveal(1, 0)
 
       expect(gameplay.message).to eq('Fields left: 10')
     end

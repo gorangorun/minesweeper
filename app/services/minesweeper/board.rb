@@ -2,6 +2,7 @@
 
 module Minesweeper
   class Board
+    include Concerns::AdjascentCells
     include Concerns::PrintMatrix
 
     attr_reader :matrix, :width, :height, :mines, :empty_fields, :mines_stepped
@@ -22,16 +23,19 @@ module Minesweeper
     end
 
     # rubocop:disable Naming/MethodParameterName
-    def set(x, y)
-      cell = matrix[x][y]
+    def reveal(x, y)
+      cell = matrix[y][x]
       return if cell.revealed?
 
+      @empty_fields -= 1
       cell.reveal
-
       if cell.mine?
         @mines_stepped += 1
-      else
-        @empty_fields -= 1
+      elsif cell.blank?
+        adjascent_cells(y, x).each do |cell_y, cell_x|
+          adjascent_cell = matrix[cell_y][cell_x]
+          reveal(cell_x, cell_y) if adjascent_cell.empty?
+        end
       end
     end
     # rubocop:enable Naming/MethodParameterName

@@ -9,8 +9,9 @@ class MatrixSerializer
       matrix.map do |cells|
         cells.map do |cell|
           c = Minesweeper::Cell.new
-          c.reveal if %w[M X].include?(cell)
-          c.set_mine if ['M', 1].include?(cell)
+          c.reveal if cell.to_s.starts_with?('X')
+          c.value = cell.to_s.sub('X', '').to_i
+          # c.set_mine if ['M', 1].include?(cell)
           c
         end
       end
@@ -22,9 +23,9 @@ class MatrixSerializer
       res = matrix.map do |cells|
         cells.map do |cell|
           if cell.revealed?
-            cell.mine? ? 'M' : 'X'
+            "X#{cell.value}"
           else
-            cell.mine? ? 1 : 0
+            cell.value
           end
         end
       end

@@ -1,23 +1,24 @@
 .max-w-sm.m-auto
   %h1.text-center.text-4xl.font-semibold.pb-10 Minesweeper
-  = form_with(model: @board, local: false) do |f|
+  = form_with(model: @board, local: false, data: { controller: 'imlazy' }) do |f|
     .flex.flex-col.pb-2
       = f.label :email
-      = f.text_field :email
+      = f.text_field :email, data: { 'imlazy-target': 'email' }
     .flex.flex-col.pb-2
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, data: { 'imlazy-target': 'name' }
     .flex.flex-col.pb-2
       = f.label :width
-      = f.text_field :width
+      = f.text_field :width, data: { 'imlazy-target': 'width' }
     .flex.flex-col.pb-2
       = f.label :height
-      = f.text_field :height
+      = f.text_field :height, data: { 'imlazy-target': 'height' }
     .flex.flex-col.pb-2
       = f.label :mines
-      = f.text_field :mines
+      = f.text_field :mines, data: { 'imlazy-target': 'mines' }
     .flex.flex-col.mt-4
-      = f.submit "Generate Board", class: 'btn-primary'
+      .btn-primary.text-center.cursor-pointer.mb-2{ 'data-action': 'click->imlazy#generate' } I m lazy
+      = f.submit "Generate Board", class: 'btn-primary cursor-pointer', data: { 'imlazy-target': 'submit' }
 .m-auto.mt-10
   %h2.m-5.text-xl.font-semibold.text-center Most recent boards:
   = render 'boards/partials/boards', boards: @boards if @boards.any?

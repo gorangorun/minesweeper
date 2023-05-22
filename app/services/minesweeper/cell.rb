@@ -2,19 +2,32 @@
 
 module Minesweeper
   class Cell
-    attr_reader :mine, :revealed
+    class MineCellError < StandardError; end
+
+    attr_reader :revealed
+    attr_accessor :value
 
     def initialize
-      @mine = false
       @revealed = false
+      @value = 0
+    end
+
+    def increment!
+      raise MineCellError, 'Cell contains mine and it\'s value cannot be incremented' if mine?
+
+      @value += 1
     end
 
     def mine?
-      @mine
+      @value == 9
     end
 
     def empty?
       !mine?
+    end
+
+    def blank?
+      @value.zero?
     end
 
     def revealed?
@@ -26,7 +39,7 @@ module Minesweeper
     end
 
     def set_mine
-      @mine = true
+      @value = 9
     end
   end
 end

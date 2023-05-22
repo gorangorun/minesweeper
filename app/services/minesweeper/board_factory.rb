@@ -2,10 +2,8 @@
 
 module Minesweeper
   class BoardFactory
+    include Concerns::AdjascentCells
     include Concerns::PrintMatrix
-
-    EMPTY = 0
-    MINE = 1
 
     class MinWidthError < StandardError; end
     class MinHeightError < StandardError; end
@@ -28,11 +26,13 @@ module Minesweeper
       raise MaxMinesError, "Max mines: #{max_mines}" if @mines > max_mines
 
       @matrix = []
+      @mine_positions = []
     end
 
     def produce
       blank_matrix
       place_mines
+      place_numbers
       Board.new(matrix:, width:, height:, mines:)
     end
 
@@ -41,6 +41,15 @@ module Minesweeper
     end
 
     private
+
+    def place_numbers
+      @mine_positions.each do |position|
+        adjascent_cells(*position).each do |y, x|
+          cell = matrix[y][x]
+          cell.increment! if cell.empty?
+        end
+      end
+    end
 
     def place_mines
       mines.times.each do
@@ -54,6 +63,7 @@ module Minesweeper
 
       if matrix[y][x].empty?
         matrix[y][x].set_mine
+        @mine_positions << [y, x]
       else
         insert_mine
       end
@@ -69,10 +79,6 @@ module Minesweeper
     end
 
     def blank_matrix_v2
-      @matrix = Array.new(height) { Array.new(width, Cell.new) }
-    end
-
-    def blank_matrix_v3
       height.times do
         y = []
         width.times do

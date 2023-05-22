@@ -25,8 +25,8 @@ module Minesweeper
       board.mines_stepped.positive?
     end
 
-    def play(...)
-      board.set(...)
+    def reveal(...)
+      board.reveal(...)
       print_matrix if display_matrix
       set_message
     end

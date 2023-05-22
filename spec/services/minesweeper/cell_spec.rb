@@ -16,6 +16,28 @@ RSpec.describe Minesweeper::Cell, type: :service do
     end
   end
 
+  describe '#increment!' do
+    it 'increments cell value + 1' do
+      expect { cell.increment! }.to change(cell, :value).from(0).to(1)
+    end
+
+    it 'fails to increment cell value + 1 if cell contains mine' do
+      cell.set_mine
+      expect { cell.increment! }.to raise_error(Minesweeper::Cell::MineCellError)
+    end
+  end
+
+  describe '#blank?' do
+    it 'returns true if cell contains value 0' do
+      expect(cell.blank?).to eq(true)
+    end
+
+    it 'returns false if cell contains value > 0' do
+      cell.increment!
+      expect(cell.blank?).to eq(false)
+    end
+  end
+
   describe '#empty?' do
     it 'returns true if cell doesnt contain mine' do
       expect(cell.empty?).to eq(true)
@@ -46,7 +68,7 @@ RSpec.describe Minesweeper::Cell, type: :service do
 
   describe '#set_mine' do
     it 'sets a mine' do
-      expect { cell.set_mine }.to change(cell, :mine).from(false).to(true)
+      expect { cell.set_mine }.to change(cell, :value).from(0).to(9)
     end
   end
 end
