@@ -27,7 +27,7 @@ module BoardsHelper
       fields << content_tag(
         :div,
         config.symbol,
-        class: "flex justify-center text-5xl bg-gray-300 hover:bg-gray-200 items-center cursor-pointer w-[74px] h-[74px] #{config.class}",
+        class: "flex justify-center text-5xl bg-gray-300 border border-gray-400 hover:bg-gray-200 items-center cursor-pointer w-[74px] h-[74px] #{config.class}",
         style: config.style,
         data: { y:, x:, action: 'click->gameplay#swipe' }
       ).html_safe
@@ -44,7 +44,8 @@ module BoardsHelper
     if cell.mine?
       OpenStruct.new(symbol: '💣', class: '')
     else
-      OpenStruct.new(symbol: cell.value, class: '')
+      value = cell.blank? ? '' : cell.value
+      OpenStruct.new(symbol: value, class: '')
     end
   end
 end
